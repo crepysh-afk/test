@@ -1,45 +1,41 @@
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
 
 /**
-* @brief Рассчитывает значение функции А
-* @param X - значение параметра X
-* @param Y - значение параметра Y
-* @param Z - значение параметра Z
-* @return Рассчитанное значение
+* @brief
+* @param Vb - значение скорости лодки в стоячей воде
+* @param Vr - скорость течения реки
+* @param t - время движения
+* @return Рассчитаное значение
 */
-double defA(const double X, const double Y, const double Z);
 
-/**
-* @brief Рассчитывает значение функции B
-* @param X - значение параметра X
-* @param Y - значение параметра Y
-* @param Z - значение параметра Z
-* @return Рассчитанное значение
-*/
-double defB(const double X, const double Y, const double Z);
+double getS(const double Vb, const double Vr, const double t);
 
 /**
 * @brief Точка входа в программу
 * @return Возваращет 0, если программа была выполнена корректно, иначе 1
 */
-int main(void)
-{
-	const double X = 0.3;
-	const double Y = 2.9;
-	const double Z = 0.5;
 
-	printf("A = %.6f\nB = %.6f", defA(X, Y, Z), defB(X, Y, Z));
+int main(void) {
+    system("chcp 1251");
+    double Vb = 0;
+    double Vr = 0;
+    double t = 0;
 
-	return 0;
+    printf("Введите скорость лодки в стоячей воде (км/ч): ");
+    scanf_s("%lf", &Vb);
+
+    printf("Введите скорость течения реки (км/ч): ");
+    scanf_s("%lf", &Vr);
+
+    printf("Введите время движения (часы): ");
+    scanf_s("%lf", &t);
+
+    printf("Путь, пройденный лодкой по течению: %.2f км\n", getS(Vb, Vr, t));
+
+    return 0;
 }
 
-double defA(const double X, const double Y, const double Z)
+double getS(double Vb, double Vr, double t)
 {
-	return (pow(Z, 2) * X + exp(-X) * cos(Y * X)) / (Y * X - exp(-X) * sin(Y * X) + 1);
-}
-
-double defB(const double X, const double Y, const double Z)
-{
-	return exp(2 * X) * log(Z + X) - pow(Y, 3 * X) * log(Y - X);
+    return (Vb + Vr) * t;
 }
