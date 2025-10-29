@@ -10,7 +10,7 @@
 * @return Рассчитаное значение
 */
 
-double gettepl(double t0, double t, double m, double c);
+double gettepl(const double t0,const double t,const double m,const double c);
 
 /**
 * @brief Точка входа в программу
@@ -20,8 +20,11 @@ double gettepl(double t0, double t, double m, double c);
 int main()
 {
  system("chcp 1251");
- double t0, t, m, q;
- double c = 480;
+ double t0 = 0;
+ double t = 0;
+ double m = 0;
+ double q = 0;
+ const int c = 480;
  printf("Введите начальную температуру тела: ");
  scanf_s("%lf", &t0);
  printf("Введите конечную температуру тела: ");
