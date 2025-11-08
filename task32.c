@@ -24,12 +24,25 @@ double getDouble();
  */
 double getSumN(const int n);
 
+/**
+ * @brief рассчитывает сумму членов последовательности,
+ * с точностью e
+ * @param e - заданная точность
+ * @return рассчитанное значение
+ */
 double getSumE(const double e);
 
-
+/**
+ * @brief рассчитывает коэффициент рекуррентного выражения
+ * @param i текущий индекс
+ * @return рассчитанное значение коэффициента
+ */
 double getRecurent(const int i);
 
-
+/**
+ * @brief проверяет, что число положительное
+ * @param value - проверяемое значение
+ */
 void checkPositive(const double value);
 
 
