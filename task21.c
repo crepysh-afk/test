@@ -1,16 +1,28 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<math.h>
 
-/**
- * @brief Вычисляет количество отрицательных чисел и абсолютную величину суммы
- * @param a Первое число
+/** 
+* @brief Вычисляет количество отрицательных чисел
+* @param a Первое число
  * @param b Второе число
  * @param c Третье число
- * @param k Указатель на переменную для записи количества отрицательных чисел
- * @return Абсолютное значение суммы a, b, c
- */
-double analyze_numbers(double a, double b, double c, int* k);
+*/
+int countNegative(double a, double b, double c);
 
+/**
+* @brief Вычисляет абсолютную сумму 
+* @param a Первое число
+ * @param b Второе число
+ * @param c Третье число
+ * @return Абсолютное значение суммы a, b, c
+*/
+double absSum(double a, double b, double c);
+
+/**
+ * @brief проверяет введенное занчение
+ * @return возвращает значение переменной value
+ */
 double getValue();
 
 /**
@@ -20,33 +32,46 @@ double getValue();
 int main()
 {
 	system("chcp 1251");
-	double abs_sum = 0;
-	int k = 0;
 
 	printf("Введите переменную а: ");
 	double a = getValue();
+
 	printf("Введите переменную b: ");
 	double b = getValue();
 
 	printf("Введите переменную c: ");
 	double c = getValue();
-	abs_sum = analyze_numbers(a, b, c, &k);
+
+	int k = countNegative(a,b,c);
+	double abs_sum = absSum(a,b,c);
+
 
 	printf("Количество отрицательных чисел: %d\n ", k);
 	printf("Абсолютное значение суммы чисел: %.2f\n ", abs_sum);
 
 	return 0;
 }
-
-double analyze_numbers(double a, double b, double c, int* k)
+double absSum(double a, double b, double c)
 {
-	*k = 0;
-	if (a < 0) (*k)++;
-	if (b < 0) (*k)++;
-	if (c < 0) (*k)++;
+	return fabs(a + b + c);
+}
 
-	double sum = a + b + c;
-	return abs(sum);
+int countNegative(double a, double b, double c)
+{
+	int k = 0;
+	if (a < 0)
+	{
+		k++;
+	}
+	if (b < 0)
+	{
+		k++;
+	}
+	if (c < 0)
+	{
+		k++;
+	}
+	return k;
 }
 double getValue()
 {
