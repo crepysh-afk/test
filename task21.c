@@ -8,7 +8,7 @@
  * @param b Второе число
  * @param c Третье число
 */
-int countNegative(double a, double b, double c);
+int countNegative(const double a, const double b, const double c);
 
 /**
 * @brief Вычисляет абсолютную сумму 
@@ -17,7 +17,7 @@ int countNegative(double a, double b, double c);
  * @param c Третье число
  * @return Абсолютное значение суммы a, b, c
 */
-double absSum(double a, double b, double c);
+double absSum(const double a, const double b, const double c);
 
 /**
  * @brief проверяет введенное занчение
