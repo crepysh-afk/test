@@ -42,7 +42,7 @@ int main(void)
 
     double x = start;
 
-    while (x <= end)
+    while (x < end+step)
     {
         printf("x = %.2lf, y = %.4lf\n", x, getY(x));
         x += step;
