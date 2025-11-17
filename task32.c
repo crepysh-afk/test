@@ -45,7 +45,10 @@ double getRecurent(const int i);
  */
 void checkPositive(const double value);
 
-
+/**
+ * @brief точка входа в программу
+ * @return возвращает 0, если программа выполнена корректно, иначе 1
+ */
 int main()
 {
     system("chcp 1251");
