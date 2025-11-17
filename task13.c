@@ -36,7 +36,7 @@ int main()
  return 0;
 
 }
-double gettepl(double t0, double t, double m, double c)
+double gettepl(const double t0,const double t,const double m,const double c)
 {
  return c * m * (t - t0);
 }
