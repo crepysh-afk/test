@@ -41,11 +41,11 @@ int main(void)
 	}
 	return 0;
 }
-double gety1(double x,double a)
+double gety1(const double x,const double a)
 {
 	return M_PI / 2 + x * a - exp(a * x);
 }
-double gety2(double x, double a)
+double gety2(const double x, const double a)
 {
 	return pow(x, 3) * a + 28;
 }
