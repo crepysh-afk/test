@@ -3,14 +3,21 @@
 #include<math.h>
 
 /**
-* @brief
+* @brief вычисляет значение y1
 * @param a - константа а
 * @param x - переменная х
 * @return - возвращает значение функции
 */
 
-double gety1(double x, double a);
-double gety2(double x, double a);
+double gety1(const double x, const double a);
+
+/**
+* @brief вычисляет значение y2
+* @param a - константа а
+* @param x - переменная х
+* @return - возвращает значение функции
+*/
+double gety2(const double x, const double a);
 
 /**
 * @brief Точка входа в программу
