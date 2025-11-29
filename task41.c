@@ -64,6 +64,10 @@ int findLastPairWithSameSign(int* arr, const size_t size, int targetProduct);
 */
 enum { RANDOM = 1, MANUAL };
 
+/**
+ * @brief точка входа в программу
+ * @return возвращает 0, если программа выполнена корректно, иначе 1
+ */
 int main()
 {
     system("chcp 1251");
