@@ -59,6 +59,9 @@ void reverseBetweenMinMax(int* arr, const size_t size);
  */
 int findLastPairWithSameSign(int* arr, const size_t size, int targetProduct);
 
+/**
+*@brief Перечисление определяет два возможных режима работы для генератора данных
+*/
 enum { RANDOM = 1, MANUAL };
 
 int main()
