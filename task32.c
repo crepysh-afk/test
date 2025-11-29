@@ -24,15 +24,31 @@ double getDouble();
  */
 double getSumN(const int n);
 
+/**
+ * @brief рассчитывает сумму членов последовательности,
+ * с точностью e
+ * @param e - заданная точность
+ * @return рассчитанное значение
+ */
 double getSumE(const double e);
 
-
+/**
+ * @brief рассчитывает коэффициент рекуррентного выражения
+ * @param i текущий индекс
+ * @return рассчитанное значение коэффициента
+ */
 double getRecurent(const int i);
 
-
+/**
+ * @brief проверяет, что число положительное
+ * @param value - проверяемое значение
+ */
 void checkPositive(const double value);
 
-
+/**
+ * @brief точка входа в программу
+ * @return возвращает 0, если программа выполнена корректно, иначе 1
+ */
 int main()
 {
     system("chcp 1251");
