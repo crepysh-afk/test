@@ -14,7 +14,7 @@ int getValue();
 * @param r длина 2-го дома
 * @param s ширина 2-го дома
 */
-int can_place(int a, int b, int p, int q, int r, int s);
+void can_place(const int a,const int b,const int p,const int q,const int r,const int s);
 
 /**
  * @brief точка входа в программу
@@ -48,7 +48,7 @@ int getValue()
 	return value;
 }
 
-int can_place(int a, int b, int p, int q, int r, int s) 
+void can_place(const int a,const int b,const int p,const int q,const int r,const int s) 
 {
 	if (
 		((p + r) <= a && q <= b && s <= b) ||
