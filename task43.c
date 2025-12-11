@@ -13,7 +13,7 @@ int Value();
  * @param message Указатель на строку с приглашением для ввода
  * @return Возвращает размер массива типа size_t
  */
-size_t getSize(char* message);
+size_t getSize(const char* message);
 
 /**
  * @brief Ручное заполнение массива пользователем
@@ -73,6 +73,15 @@ int countZeroel(int** arr, const size_t columns, const size_t rows);
 int** getArray(const size_t rows, const size_t columns);
 
 /**
+ * @brief Создает копию двумерного массива
+ * @param arr Указатель на исходный массив
+ * @param rows Количество строк в массиве
+ * @param columns Количество столбцов в массиве
+ * @return Указатель на копию массива или NULL при ошибке
+ */
+int** copyArray(int** arr, const size_t rows, const size_t columns);
+
+/**
 * @brief Освобождает память массива
 * @param arr Указатель на массив для освобождения
 * @param rows количество строк массива
@@ -102,6 +111,10 @@ void changeNechet(int** arr, const size_t columns, const size_t rows);
 */
 enum { RANDOM = 1, MANUAL, task1 = 1, task2 };
 
+/**
+ * @brief Точка входа в программу
+ * @return 0, если программа выполнена корректно, иначе 1
+ */
 int main()
 {
     system("chcp 1251");
@@ -139,11 +152,16 @@ int main()
     switch (secondchoice)
     {
     case task1:
-        changeNechet(arr, columns, rows);
-        result_array = arr;
+    {
+        int** arr_copy = copyArray(arr, rows, columns);
+        changeNechet(arr_copy, columns, rows);
+        result_array = arr_copy;
         printf("\nМассив после преобразования (task1):\n");
         printArray(result_array, result_rows, result_columns);
-        break;
+        freeArray(arr, rows);
+        arr = result_array;
+    }
+    break;
     case task2:
     {
         size_t new_columns = 0;
@@ -158,6 +176,9 @@ int main()
         }
         else
         {
+            int** arr_copy = copyArray(arr, rows, columns);
+            freeArray(arr, rows);
+            arr = arr_copy;
             result_array = arr;
             printf("\nМассив без изменений (нет столбцов с нулями):\n");
             printArray(result_array, result_rows, result_columns);
@@ -189,7 +210,7 @@ int Value()
     return value;
 }
 
-size_t getSize(char* message)
+size_t getSize(const char* message)
 {
     printf("%s", message);
     int value = Value();
@@ -277,6 +298,25 @@ int** getArray(const size_t rows, const size_t columns)
     }
 
     return arr;
+}
+
+int** copyArray(int** arr, const size_t rows, const size_t columns)
+{
+    if (arr == NULL) {
+        return NULL;
+    }
+    
+    int** copy = getArray(rows, columns);
+    
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < columns; j++)
+        {
+            copy[i][j] = arr[i][j];
+        }
+    }
+    
+    return copy;
 }
 
 void freeArray(int** arr, const size_t rows)
@@ -368,7 +408,6 @@ int** Fillarr(int** arr, const size_t columns, const size_t rows, size_t* new_co
                 break;
             }
         }
-
         if (has_zero)
         {
             for (size_t i = 0; i < rows; i++)
