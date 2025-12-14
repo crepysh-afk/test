@@ -165,7 +165,7 @@ int main()
     case task2:
     {
         int zeroCols = countZeroel(arr, columns, rows);
-        size_t new_columns;
+        size_t new_columns = 0;
 
         if (zeroCols == 0)
         {
