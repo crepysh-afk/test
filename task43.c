@@ -53,7 +53,8 @@ void checkRange(const int start, const int end);
  * @param rows Количество строк в массиве
  * @return Указатель на новый массив или NULL если нет изменений
  */
-int** Fillarr(int** arr, const size_t columns, const size_t rows, size_t* new_columns);
+int** Fillarr(int** arr, const size_t columns, const size_t rows);
+
 
 /**
  * @brief Подсчитывает количество столбцов, содержащих нулевые элементы
@@ -136,7 +137,7 @@ int main()
     default:
         printf("Error: некорректный выбор\n");
         freeArray(arr, rows);
-        return 1;
+        exit(1);
     }
 
     printf("\nИсходный массив:\n");
@@ -158,44 +159,46 @@ int main()
         result_array = arr_copy;
         printf("\nМассив после преобразования (task1):\n");
         printArray(result_array, result_rows, result_columns);
-        freeArray(arr, rows);
-        arr = result_array;
+        break;
     }
-    break;
+    
     case task2:
     {
-        size_t new_columns = 0;
-        result_array = Fillarr(arr, columns, rows, &new_columns);
-        if (result_array != NULL)
+        int zeroCols = countZeroel(arr, columns, rows);
+        size_t new_columns;
+
+        if (zeroCols == 0)
         {
-            result_columns = new_columns;
-            printf("\nМассив после преобразования (task2):\n");
-            printArray(result_array, result_rows, result_columns);
-            freeArray(arr, rows);
-            arr = result_array;
+            new_columns = columns;
         }
         else
         {
-            int** arr_copy = copyArray(arr, rows, columns);
-            freeArray(arr, rows);
-            arr = arr_copy;
-            result_array = arr;
-            printf("\nМассив без изменений (нет столбцов с нулями):\n");
-            printArray(result_array, result_rows, result_columns);
+            new_columns = columns + (size_t)zeroCols;
         }
+
+        result_array = Fillarr(arr, columns, rows);
+        result_columns = new_columns;
+
+        if (zeroCols == 0)
+        {
+            printf("\nМассив без изменений (нет столбцов с нулями):\n");
+        }
+        else
+        {
+            printf("\nМассив после преобразования (task2):\n");
+        }
+
+        printArray(result_array, result_rows, result_columns);
+        break;
     }
-    break;
     default:
         printf("Error: некорректный выбор задания\n");
         freeArray(arr, rows);
-        return 1;
+        exit(1);
     }
 
-    if (arr != NULL)
-    {
-        freeArray(arr, result_rows);
-    }
-
+    freeArray(arr,rows);
+    freeArray(result_array, result_rows);
     return 0;
 }
 
@@ -305,9 +308,9 @@ int** copyArray(int** arr, const size_t rows, const size_t columns)
     if (arr == NULL) {
         return NULL;
     }
-    
+
     int** copy = getArray(rows, columns);
-    
+
     for (size_t i = 0; i < rows; i++)
     {
         for (size_t j = 0; j < columns; j++)
@@ -315,7 +318,7 @@ int** copyArray(int** arr, const size_t rows, const size_t columns)
             copy[i][j] = arr[i][j];
         }
     }
-    
+
     return copy;
 }
 
@@ -374,7 +377,7 @@ int countZeroel(int** arr, const size_t columns, const size_t rows)
     return k;
 }
 
-int** Fillarr(int** arr, const size_t columns, const size_t rows, size_t* new_columns)
+int** Fillarr(int** arr, const size_t columns, const size_t rows)
 {
     check_memory(arr);
 
@@ -382,13 +385,13 @@ int** Fillarr(int** arr, const size_t columns, const size_t rows, size_t* new_co
 
     if (count == 0)
     {
-        *new_columns = columns;
-        return NULL;
+        int** copy = copyArray(arr, rows, columns);
+        return copy;
     }
 
-    *new_columns = columns + count;
+    size_t new_columns = columns + (size_t)count;
+    int** arr_2 = getArray(rows, new_columns);
 
-    int** arr_2 = getArray(rows, *new_columns);
     size_t next_idx = 0;
 
     for (size_t j = 0; j < columns; j++)
@@ -408,6 +411,7 @@ int** Fillarr(int** arr, const size_t columns, const size_t rows, size_t* new_co
                 break;
             }
         }
+
         if (has_zero)
         {
             for (size_t i = 0; i < rows; i++)
